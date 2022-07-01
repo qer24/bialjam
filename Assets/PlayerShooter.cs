@@ -60,7 +60,7 @@ public class PlayerShooter : MonoBehaviour
         var bulletHole = LeanPool.Spawn(bulletHolePrefab, hit.point + hit.normal * 0.1f, Quaternion.identity);
         bulletHole.transform.localScale = bulletHolePrefab.transform.localScale;
         bulletHoleDissapearTween.Play(bulletHole.transform.LeanScale(Vector3.zero, bulletHoleDissapearTween.time));
-        LeanPool.Despawn(bulletHole, bulletHoleDissapearTween.time);
+        LeanPool.Despawn(bulletHole, bulletHoleDissapearTween.time + 0.25f);
     }
 
     private void Tracer(RaycastHit hit)
@@ -74,6 +74,6 @@ public class PlayerShooter : MonoBehaviour
             tracer.SetPosition(0, Vector3.Lerp(playerCam.transform.position + Vector3.down, hit.point, val));
         }, 0f, 1f, tracerTween.time));
         
-        LeanPool.Despawn(tracer, tracerTween.time);
+        LeanPool.Despawn(tracer, tracerTween.time + 0.25f);
     }
 }

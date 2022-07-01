@@ -258,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &552123222
 Transform:
   m_ObjectHideFlags: 0
@@ -792,7 +792,7 @@ MonoBehaviour:
   tracerPrefab: {fileID: 3711698134895428361, guid: c4e9eb8799563ea4aa841bacff72447b,
     type: 3}
   tracerTween:
-    time: 0.1
+    time: 0.2
     type: 6
     hasDelay: 0
     delay: 0
@@ -1520,7 +1520,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a9f166ca3315c4846a90def7fb691b8c, type: 2}
+      objectReference: {fileID: 2100000, guid: 2d01ee5d2e29f8445b6dfdc80217abea, type: 2}
     - target: {fileID: 8345070698674014717, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1620,7 +1620,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a9f166ca3315c4846a90def7fb691b8c, type: 2}
+      objectReference: {fileID: 2100000, guid: 2d01ee5d2e29f8445b6dfdc80217abea, type: 2}
     - target: {fileID: 8345070699248850415, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1675,7 +1675,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a9f166ca3315c4846a90def7fb691b8c, type: 2}
+      objectReference: {fileID: 2100000, guid: 2d01ee5d2e29f8445b6dfdc80217abea, type: 2}
     - target: {fileID: 8345070700168519850, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
