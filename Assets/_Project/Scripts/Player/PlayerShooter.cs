@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FMODUnity;
 using Lean.Pool;
 using StarterAssets;
 using UnityEngine;
@@ -27,6 +28,9 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float shakeAmplitude = 3f;
     [SerializeField] private float shakeFrequency = 1f;
 
+    [Space]
+    [SerializeField] private EventReference shootEvent;
+    
     [Space] 
     [SerializeField] private float killKnockbackForce;
 
@@ -61,11 +65,13 @@ public class PlayerShooter : MonoBehaviour
         cooldownTimer = shootCooldown;
         shootInaccuracy.SetMax();
         
+        CameraShake.instance.Shake(shakeDuration, shakeAmplitude, shakeFrequency);
+        shootEvent.Play();
+
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out var hit, 100f))
         {
             BulletHole(hit);
             Tracer(hit);
-            CameraShake.instance.Shake(shakeDuration, shakeAmplitude, shakeFrequency);
 
             if (hit.collider.transform.parent.TryGetComponent(out Health health))
             {
@@ -81,7 +87,7 @@ public class PlayerShooter : MonoBehaviour
 
     private void BulletHole(RaycastHit hit)
     {
-        var bulletHole = LeanPool.Spawn(bulletHolePrefab, hit.point + hit.normal * 0.1f, Quaternion.identity, hit.collider.transform);
+        var bulletHole = LeanPool.Spawn(bulletHolePrefab, hit.point - hit.normal * 0.05f, Quaternion.identity, hit.collider.transform);
         bulletHole.transform.localScale = bulletHolePrefab.transform.localScale;
         bulletHoleDissapearTween.Play(bulletHole.transform.LeanScale(Vector3.zero, bulletHoleDissapearTween.time));
         LeanPool.Despawn(bulletHole, bulletHoleDissapearTween.time + 0.25f);

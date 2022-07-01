@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -59,7 +60,8 @@ namespace StarterAssets
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
-
+		private bool _wasGrounded = true;
+		
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
@@ -73,6 +75,8 @@ namespace StarterAssets
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
+		
+		public event Action OnJump, OnLand; 
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -216,12 +220,18 @@ namespace StarterAssets
 				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+					OnJump?.Invoke();
 				}
 
 				// jump timeout
 				if (_jumpTimeoutDelta >= 0.0f)
 				{
 					_jumpTimeoutDelta -= Time.deltaTime;
+				}
+				
+				if (!_wasGrounded)
+				{
+					OnLand?.Invoke();
 				}
 			}
 			else
@@ -244,6 +254,8 @@ namespace StarterAssets
 			{
 				_verticalVelocity += Gravity * Time.deltaTime;
 			}
+			
+			_wasGrounded = Grounded;
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +9,7 @@ public class Health : MonoBehaviour
 {
     public int maxHealth;
     public int currentHealth = 0;
+    [SerializeField] private EventReference deathSfx;
 
     public event Action<int> OnHealthChanged;
     public UnityEvent OnDeath;
@@ -42,5 +44,7 @@ public class Health : MonoBehaviour
 
         isDead = true;
         OnDeath?.Invoke();
+        
+        deathSfx.Play(transform.position);
     }
 }

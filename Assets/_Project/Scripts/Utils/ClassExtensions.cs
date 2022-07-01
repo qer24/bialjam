@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+
 public static class ClassExtensions
 {
     public static Vector3 WithX(this Vector3 vector, float x)
@@ -204,7 +204,8 @@ public static class ClassExtensions
         int midpoint = count / 2;
         if(count % 2 == 0)
             return (Convert.ToDouble(source.ElementAt(midpoint - 1)) + Convert.ToDouble(source.ElementAt(midpoint))) / 2.0;
-        return Convert.ToDouble(source.ElementAt(midpoint));
+        else
+            return Convert.ToDouble(source.ElementAt(midpoint));
     }
 
     public static LTDescr LeanWeight(this Volume volume, float to, float time)
@@ -258,178 +259,5 @@ public static class ClassExtensions
     {
         var start = text.color;
         return LeanTween.value(text.gameObject, val => text.color = Color.Lerp(start, to, val), 0, 1f, time);
-    }
-
-    public static Gradient Lerp(this Gradient a, Gradient b, float t)
-    {
-        return Lerp(a, b, t, false, false);
-    }
-
-    public static Gradient LerpNoAlpha(this Gradient a, Gradient b, float t)
-    {
-        return Lerp(a, b, t, true, false);
-    }
-
-    public static Gradient LerpNoColor(this Gradient a, Gradient b, float t)
-    {
-        return Lerp(a, b, t, false, true);
-    }
-
-    private static Gradient Lerp(Gradient a, Gradient b, float t, bool noAlpha, bool noColor)
-    {
-        //list of all the unique key times
-        var keysTimes = new List<float>();
-
-        if (!noColor)
-        {
-            for (int i = 0; i < a.colorKeys.Length; i++)
-            {
-                float k = a.colorKeys[i].time;
-                if (!keysTimes.Contains(k))
-                    keysTimes.Add(k);
-            }
-
-            for (int i = 0; i < b.colorKeys.Length; i++)
-            {
-                float k = b.colorKeys[i].time;
-                if (!keysTimes.Contains(k))
-                    keysTimes.Add(k);
-            }
-        }
-
-        if (!noAlpha)
-        {
-            for (int i = 0; i < a.alphaKeys.Length; i++)
-            {
-                float k = a.alphaKeys[i].time;
-                if (!keysTimes.Contains(k))
-                    keysTimes.Add(k);
-            }
-
-            for (int i = 0; i < b.alphaKeys.Length; i++)
-            {
-                float k = b.alphaKeys[i].time;
-                if (!keysTimes.Contains(k))
-                    keysTimes.Add(k);
-            }
-        }
-
-        GradientColorKey[] clrs = new GradientColorKey[keysTimes.Count];
-        GradientAlphaKey[] alphas = new GradientAlphaKey[keysTimes.Count];
-
-        //Pick colors of both gradients at key times and lerp them
-        for (int i = 0; i < keysTimes.Count; i++)
-        {
-            float key = keysTimes[i];
-            var clr = Color.Lerp(a.Evaluate(key), b.Evaluate(key), t);
-            clrs[i] = new GradientColorKey(clr, key);
-            alphas[i] = new GradientAlphaKey(clr.a, key);
-        }
-
-        var g = new Gradient();
-        g.SetKeys(clrs, alphas);
-
-        return g;
-    }
-    
-    public static LTDescr LeanColor(this SpriteRenderer rend, Color to, float time)
-    {
-        var start = rend.color;
-        return LeanTween.value(rend.gameObject, val => rend.color = Color.Lerp(start, to, val), 0, 1f, time);
-    }
-
-    public static bool TryAddComponent<T>(this GameObject gameObject, out T component) where T : Component
-    {
-        if (gameObject.TryGetComponent(out component))
-        {
-            return true;
-        }
-        
-        component = gameObject.AddComponent<T>();
-        return false;
-    }
-    
-    public static void SetLayerIncludingChildren(this GameObject parent, int layer)
-    {
-        parent.layer = layer;
-
-        foreach (Transform child in parent.transform)
-        {
-            SetLayerIncludingChildren(child.gameObject, layer);
-        }
-    }
-
-    public static Vector3 CameraCanvasPosToWorldPos(this Vector3 camPos, Camera cam)
-    {
-        var screenPos = RectTransformUtility.WorldToScreenPoint(cam, camPos);
-        return cam.ScreenToWorldPoint(screenPos);
-    }
-    
-    public static Vector3 OverlayCanvasPosToWorldPos(this Vector3 camPos, Camera cam)
-    {
-        return cam.ScreenToWorldPoint(camPos);
-    }
-    
-    public static Vector3 WorldToCanvasPosition(this Canvas canvas, Vector3 worldPosition, Camera camera = null)
-    {
-        if (camera == null)
-        {
-            camera = Camera.main;
-        }
-        var viewportPosition = camera.WorldToViewportPoint(worldPosition);
-        return canvas.ViewportToCanvasPosition(viewportPosition);
-    }
-
-    public static Vector3 ScreenToCanvasPosition(this Canvas canvas, Vector3 screenPosition)
-    {
-        var viewportPosition = new Vector3(screenPosition.x / Screen.width,
-            screenPosition.y / Screen.height,
-            0);
-        return canvas.ViewportToCanvasPosition(viewportPosition);
-    }
-
-    public static Vector3 ViewportToCanvasPosition(this Canvas canvas, Vector3 viewportPosition)
-    {
-        var centerBasedViewPortPosition = viewportPosition - new Vector3(0.5f, 0.5f, 0);
-        var canvasRect = canvas.GetComponent<RectTransform>();
-        var scale = canvasRect.sizeDelta;
-        return Vector3.Scale(centerBasedViewPortPosition, scale);
-    }
-    
-    public static LTDescr LeanMoveAnchored(this RectTransform rt, Vector2 to, float time)
-    {
-        var start = rt.anchoredPosition;
-        return LeanTween.value(rt.gameObject, val => rt.anchoredPosition = Vector2.Lerp(start, to, val), 0, 1f, time);
-    }
-    
-    public static List<T> Shuffle<T>(this IEnumerable<T> list, int size)
-    {
-        var r = new Squirrel3();
-        var shuffledList = 
-            list.
-                Select(x => new { Number = r.Next(), Item = x }).
-                OrderBy(x => x.Number).
-                Select(x => x.Item).
-                Take(size); // Assume first @size items is fine
-
-        return shuffledList.ToList();
-    }
-    
-    public static void AddAfterEach<T>(this List<T> list, Func<T, Boolean> condition, T objectToAdd) 
-    {
-        foreach (var item in list.Select((o, i) => new { Value = o, Index = i }).Where(p => condition(p.Value)).OrderByDescending(p => p.Index))
-        {
-            if (item.Index + 1 == list.Count) list.Add(objectToAdd);
-            else list.Insert(item.Index + 1, objectToAdd);
-        } 
-    }
-    
-    public static float ParseAsFloat(this string input)
-    {
-        input = input.Replace(',', '.');
-        var parsed = float.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out float value);
-
-        if (!parsed) return 0;
-        return value;
     }
 }

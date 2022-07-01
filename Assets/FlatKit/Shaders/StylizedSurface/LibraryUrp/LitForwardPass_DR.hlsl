@@ -54,6 +54,8 @@ struct Varyings
 
 void InitializeInputData(Varyings input, half3 normalTS, out InputData inputData)
 {
+    inputData = (InputData)0;
+
     inputData.positionWS = input.posWS;
 
 #ifdef _NORMALMAP
@@ -86,13 +88,39 @@ void InitializeInputData(Varyings input, half3 normalTS, out InputData inputData
     inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(input.positionCS);
     inputData.shadowMask = SAMPLE_SHADOWMASK(input.lightmapUV);
 #endif
+
+#if VERSION_GREATER_EQUAL(12, 0)
+    inputData.positionCS = input.positionCS;
+#if defined(_NORMALMAP)
+    inputData.tangentToWorld = half3x3(input.tangent.xyz, input.bitangent.xyz, input.normal.xyz);
+#endif
+
+    #if defined(DEBUG_DISPLAY)
+    #if defined(DYNAMICLIGHTMAP_ON)
+    inputData.dynamicLightmapUV = input.dynamicLightmapUV.xy;
+    #endif
+    #if defined(LIGHTMAP_ON)
+    inputData.staticLightmapUV = input.staticLightmapUV;
+    #else
+    inputData.vertexSH = input.vertexSH;
+    #endif
+    #endif
+#endif
 }
 
 Varyings StylizedPassVertex(Attributes input)
 {
-    Varyings output = (Varyings)0;
+    #if defined(CURVEDWORLD_IS_INSTALLED) && !defined(CURVEDWORLD_DISABLED_ON)
+    #ifdef CURVEDWORLD_NORMAL_TRANSFORMATION_ON
+        CURVEDWORLD_TRANSFORM_VERTEX_AND_NORMAL(input.positionOS, input.normalOS, input.tangentOS)
+    #else
+        CURVEDWORLD_TRANSFORM_VERTEX(input.positionOS)
+    #endif
+    #endif
 
     UNITY_SETUP_INSTANCE_ID(input);
+
+    Varyings output = (Varyings)0;
     UNITY_TRANSFER_INSTANCE_ID(input, output);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
@@ -136,43 +164,40 @@ half4 StylizedPassFragment(Varyings input) : SV_Target
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
 
-    const float2 uv = input.uv;
-    const half4 diffuseAlpha = SampleAlbedoAlpha(uv, TEXTURE2D_ARGS(_BaseMap, sampler_BaseMap));
-    half3 diffuse = diffuseAlpha.rgb * _BaseColor.rgb;
-
-    const half alpha = diffuseAlpha.a * _BaseColor.a;
-    AlphaDiscard(alpha, _Cutoff);
-#ifdef _ALPHAPREMULTIPLY_ON
-    diffuse *= alpha;
-#endif
-
-    const half3 normalTS = SampleNormal(input.uv, TEXTURE2D_ARGS(_BumpMap, sampler_BumpMap));
-    const half3 emission = SampleEmission(input.uv, _EmissionColor.rgb, TEXTURE2D_ARGS(_EmissionMap, sampler_EmissionMap));
+    SurfaceData surfaceData;
+    InitializeSimpleLitSurfaceData(input.uv, surfaceData);
 
     InputData inputData;
-    InitializeInputData(input, normalTS, inputData);
+    InitializeInputData(input, surfaceData.normalTS, inputData);
+
+#if VERSION_GREATER_EQUAL(12, 1)
+    SETUP_DEBUG_TEXTURE_DATA(inputData, input.uv, _BaseMap);
+#endif
+
+#ifdef _DBUFFER
+    ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
+#endif
 
     // Computes direct light contribution.
-    half4 color = UniversalFragment_DSTRM(inputData, diffuse, emission, alpha);
+    half4 color = UniversalFragment_DSTRM(inputData, surfaceData.albedo * _BaseColor.rgb, surfaceData.emission, surfaceData.alpha);
 
     {
-        const half4 tex = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.uv);
 #if defined(_TEXTUREBLENDINGMODE_ADD)
-        color.rgb += lerp(half4(0.0, 0.0, 0.0, 0.0), tex, _TextureImpact).rgb;
+        color.rgb += lerp(half3(0.0f, 0.0f, 0.0f), surfaceData.albedo, _TextureImpact);
 #else  // _TEXTUREBLENDINGMODE_MULTIPLY
         // This is the default blending mode for compatibility with the v.1 of the asset.
-        color.rgb *= lerp(half4(1.0, 1.0, 1.0, 1.0), tex, _TextureImpact).rgb;
+        color.rgb *= lerp(half3(1.0f, 1.0f, 1.0f), surfaceData.albedo, _TextureImpact);
 #endif
     }
 
 #if defined(DR_VERTEX_COLORS_ON)
-    color.rgb *= input.VertexColor;
+    color.rgb *= input.VertexColor.rgb;
 #endif
 
     color.rgb = MixFog(color.rgb, inputData.fogCoord);
 
 #if VERSION_GREATER_EQUAL(10, 0)
-    color.a = OutputAlpha(color.a);
+    color.a = OutputAlpha(color.a, _Surface);
 #endif
 
     return color;

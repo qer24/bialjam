@@ -9,6 +9,7 @@ public class PlayerSizeManager : MonoBehaviour
 {
     [SerializeField] private Transform playerCapsule;
     [SerializeField] private float sizeLerpSpeed;
+    [SerializeField] private Vector2 minMaxSize;
 
     [Space]
     [SerializeField] private FirstPersonController playerController;
@@ -18,8 +19,10 @@ public class PlayerSizeManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera vcam;
     [SerializeField] private Vector2 minMaxFov;
 
-    public float currentSize = 1f;
+    private float currentSize = 1f;
     private float currentFov;
+
+    public event Action<float> OnSizeUpdated; 
 
     private void Update()
     {
@@ -28,5 +31,12 @@ public class PlayerSizeManager : MonoBehaviour
 
         currentFov = Mathf.Lerp(minMaxFov.y, minMaxFov.x, currentSize);
         vcam.m_Lens.FieldOfView = Mathf.Lerp(vcam.m_Lens.FieldOfView, currentFov, sizeLerpSpeed * Time.deltaTime);
+    }
+
+    public void UpdateSize(float amount)
+    {
+        currentSize += amount;
+        currentSize = Mathf.Clamp(currentSize, minMaxSize.x, minMaxSize.y);
+        OnSizeUpdated?.Invoke(currentSize);
     }
 }

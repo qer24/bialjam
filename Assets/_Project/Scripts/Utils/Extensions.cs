@@ -104,5 +104,11 @@ namespace Utils
             var startRot = transform.rotation;
             return LeanTween.value(transform.gameObject, val => transform.rotation = Quaternion.Lerp(startRot, to, val), 0, 1, time);
         }
+        
+        public static LTDescr LeanSmoothRotateLocal(this Transform transform, Quaternion to, float time)
+        {
+            var startRot = transform.localRotation;
+            return LeanTween.value(transform.gameObject, val => transform.localRotation = Quaternion.Lerp(startRot, to, val), 0, 1, time);
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using FlatKit.StylizedSurface;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum SurfaceType {
     Opaque,
@@ -24,18 +25,19 @@ public enum RenderFace {
     Both = 0
 }
 
-public class StylizedSurfaceEditor : ShaderGUI {
+public class StylizedSurfaceEditor : BaseShaderGUI {
     private Material _target;
-    private MaterialEditor _editor;
     private MaterialProperty[] _properties;
     private int _celShadingNumSteps = 0;
     private AnimationCurve _gradient = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
+
+    private MaterialProperty QueueOffsetProp { get; set; }
 
     private static readonly Dictionary<string, bool> FoldoutStates =
         new Dictionary<string, bool> {{"Rendering options", false}};
 
     private static readonly Color HashColor = new Color(0.85023f, 0.85034f, 0.85045f, 0.85056f);
-    private static readonly int ColorPropertyName = Shader.PropertyToID("_Color");
+    private static readonly int ColorPropertyName = Shader.PropertyToID("_BaseColor");
 
     void DrawStandard(MaterialProperty property) {
         string displayName = property.displayName;
@@ -43,7 +45,15 @@ public class StylizedSurfaceEditor : ShaderGUI {
         displayName = Regex.Replace(displayName, @" ?\[.*?\]", string.Empty);
         Tooltips.map.TryGetValue(displayName, out string tooltip);
         var guiContent = new GUIContent(displayName, tooltip);
-        _editor.ShaderProperty(property, guiContent);
+        if (property.type == MaterialProperty.PropType.Texture) {
+            if (!property.name.Contains("_BaseMap")) {
+                EditorGUILayout.Space(15);
+            }
+
+            materialEditor.TexturePropertySingleLine(guiContent, property);
+        } else {
+            materialEditor.ShaderProperty(property, guiContent);
+        }
     }
 
     MaterialProperty FindProperty(string name) {
@@ -54,11 +64,22 @@ public class StylizedSurfaceEditor : ShaderGUI {
         return _target != null && _target.HasProperty(name);
     }
 
+#if UNITY_2021_2_OR_NEWER
+    [Obsolete("MaterialChanged has been renamed ValidateMaterial", false)]
+#endif
+    public override void MaterialChanged(Material material) { }
+
     public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties) {
-        _editor = materialEditor;
+        this.materialEditor = materialEditor;
         _properties = properties;
         _target = materialEditor.target as Material;
         Debug.Assert(_target != null, "_target != null");
+
+        if (_target.shader.name.Equals("FlatKit/Stylized Surface With Outline")) {
+            EditorGUILayout.HelpBox(
+                "'Stylized Surface with Outline' shader has been deprecated. Please use the outline section in the 'Stylized Surface' shader.",
+                MessageType.Warning);
+        }
 
         int originalIntentLevel = EditorGUI.indentLevel;
         int foldoutRemainingItems = 0;
@@ -92,6 +113,8 @@ public class StylizedSurfaceEditor : ShaderGUI {
                             !_target.IsKeywordEnabled("_UNITYSHADOWMODE_COLOR");
             skipProperty |= displayName.Contains("[DR_ENABLE_LIGHTMAP_DIR]") &&
                             !_target.IsKeywordEnabled("DR_ENABLE_LIGHTMAP_DIR");
+            skipProperty |= displayName.Contains("[DR_OUTLINE_ON]") &&
+                            !_target.IsKeywordEnabled("DR_OUTLINE_ON");
 
             if (_target.IsKeywordEnabled("DR_ENABLE_LIGHTMAP_DIR") &&
                 displayName.Contains("Override light direction")) {
@@ -162,9 +185,23 @@ public class StylizedSurfaceEditor : ShaderGUI {
                 property.colorValue = _target.GetColor(ColorPropertyName);
             }
 
+            if (!skipProperty && property.name.Contains("_EmissionMap")) {
+                bool emission = materialEditor.EmissionEnabledProperty();
+                if (emission) {
+                    _target.EnableKeyword("_EMISSION");
+                } else {
+                    _target.DisableKeyword("_EMISSION");
+                }
+            }
+
             bool hideInInspector = (property.flags & MaterialProperty.PropFlags.HideInInspector) != 0;
             if (!hideInInspector && !skipProperty) {
                 DrawStandard(property);
+            }
+
+            if (!skipProperty && property.name.Contains("_EmissionColor")) {
+                EditorGUILayout.Space(15);
+                DrawTileOffset(materialEditor, FindProperty("_BaseMap"));
             }
 
             EditorGUI.indentLevel = originalIntentLevel;
@@ -176,11 +213,22 @@ public class StylizedSurfaceEditor : ShaderGUI {
         if (FoldoutStates["Rendering options"]) {
             EditorGUI.indentLevel += 1;
 
-            HandleUrpSettings(_target, _editor);
+            HandleUrpSettings(_target, materialEditor);
 
-            EditorGUILayout.Space();
-            _editor.EnableInstancingField();
+            QueueOffsetProp = FindProperty("_QueueOffset", _properties, false);
+            DrawQueueOffsetField();
+
+            materialEditor.EnableInstancingField();
         }
+
+        if (_target.IsKeywordEnabled("_UNITYSHADOWMODE_NONE")) {
+            _target.EnableKeyword("_RECEIVE_SHADOWS_OFF");
+        } else {
+            _target.DisableKeyword("_RECEIVE_SHADOWS_OFF");
+        }
+
+        // Toggle the outline pass.
+        _target.SetShaderPassEnabled("SRPDefaultUnlit", _target.IsKeywordEnabled("DR_OUTLINE_ON"));
 
         /*
         if (HasProperty("_MainTex")) {
@@ -422,6 +470,25 @@ public class StylizedSurfaceEditor : ShaderGUI {
 
         return fullPath.Remove(0, count);
     }
+
+#if !UNITY_2020_3_OR_NEWER
+    private new void DrawQueueOffsetField() {
+        GUIContent queueSlider = new GUIContent("     Priority",
+            "Determines the chronological rendering order for a Material. High values are rendered first.");
+        const int queueOffsetRange = 50;
+        MaterialProperty queueOffsetProp = FindProperty("_QueueOffset", _properties, false);
+        if (queueOffsetProp == null) return;
+        EditorGUI.BeginChangeCheck();
+        EditorGUI.showMixedValue = queueOffsetProp.hasMixedValue;
+        var queue = EditorGUILayout.IntSlider(queueSlider, (int) queueOffsetProp.floatValue, -queueOffsetRange,
+            queueOffsetRange);
+        if (EditorGUI.EndChangeCheck())
+            queueOffsetProp.floatValue = queue;
+        EditorGUI.showMixedValue = false;
+
+        _target.renderQueue = (int)RenderQueue.Transparent + queue;
+    }
+#endif
 
     private void TransferToBaseMap() {
         var baseMapProp = FindProperty("_MainTex");

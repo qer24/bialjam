@@ -69,7 +69,7 @@ namespace Lean.Pool
 		public bool Stamp { set { stamp = value; } get { return stamp; } } [SerializeField] private bool stamp;
 
 		/// <summary>Should detected issues be output to the console?</summary>
-		public bool Warnings { set { warnings = value; } get { return warnings; } } [SerializeField] private bool warnings = true;
+		public bool Warnings { set { warnings = value; } get { return warnings; } } [SerializeField] private bool warnings = false;
 
 		/// <summary>This stores all spawned clones in a list. This is used when Recycle is enabled, because knowing the spawn order must be known. This list is also used during serialization.</summary>
 		[SerializeField]
