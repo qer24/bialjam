@@ -20,7 +20,7 @@ public class AutoTween
     public LTDescr Play(LTDescr tween)
     {
         if (autoCancel) Cancel();
-        var newTween = tween.setTime(time).setEase(type);
+        var newTween = tween.setEase(type);
         if (hasDelay) newTween.setDelay(delay);
         uniqueId = newTween.uniqueId;
         return newTween;
