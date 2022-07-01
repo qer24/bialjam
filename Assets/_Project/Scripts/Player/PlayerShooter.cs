@@ -27,11 +27,16 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float shakeAmplitude = 3f;
     [SerializeField] private float shakeFrequency = 1f;
 
+    [Space] 
+    [SerializeField] private float killKnockbackForce;
+
     private float cooldownTimer = -0.1f;
 
     private void Awake()
     {
         inaccuracy.inaccuracySources.Add(shootInaccuracy);
+        bulletHoleDissapearTween.autoCancel = false;
+        tracerTween.autoCancel = false;
     }
 
     private void OnEnable()
@@ -65,13 +70,18 @@ public class PlayerShooter : MonoBehaviour
             if (hit.collider.transform.parent.TryGetComponent(out Health health))
             {
                 health.RemoveHealth(1);
+
+                if (health.isDead)
+                {
+                    health.GetComponentInChildren<Rigidbody>().AddExplosionForce(killKnockbackForce, hit.point + hit.normal * 0.2f, 0.25f, 0.5f, ForceMode.Impulse);
+                }
             }
         }
     }
 
     private void BulletHole(RaycastHit hit)
     {
-        var bulletHole = LeanPool.Spawn(bulletHolePrefab, hit.point + hit.normal * 0.1f, Quaternion.identity);
+        var bulletHole = LeanPool.Spawn(bulletHolePrefab, hit.point + hit.normal * 0.1f, Quaternion.identity, hit.collider.transform);
         bulletHole.transform.localScale = bulletHolePrefab.transform.localScale;
         bulletHoleDissapearTween.Play(bulletHole.transform.LeanScale(Vector3.zero, bulletHoleDissapearTween.time));
         LeanPool.Despawn(bulletHole, bulletHoleDissapearTween.time + 0.25f);

@@ -29,4 +29,9 @@ public class RotateTween : MonoBehaviour
                 if (repeat) rotationTween.setLoopClamp();
             });
     }
+
+    private void OnDisable()
+    {
+        tween.Cancel();
+    }
 }
