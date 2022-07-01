@@ -11,7 +11,7 @@ public class PlayerInnacuracy : MonoBehaviour
     
     public float inaccuracy = 0;
 
-    private List<InaccuracySource> inaccuracySources = new List<InaccuracySource>();
+    public List<InaccuracySource> inaccuracySources = new List<InaccuracySource>();
 
     [Serializable]
     public class InaccuracySource

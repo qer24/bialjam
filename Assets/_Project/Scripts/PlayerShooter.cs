@@ -10,9 +10,11 @@ public class PlayerShooter : MonoBehaviour
 {
     [SerializeField] private Camera playerCam;
     [SerializeField] private StarterAssetsInputs input;
+    [SerializeField] private PlayerInnacuracy inaccuracy;
 
     [Space] 
     [SerializeField] private float shootCooldown = 0.5f;
+    [SerializeField] private PlayerInnacuracy.InaccuracySource shootInaccuracy;
 
     [Space] 
     [SerializeField] private GameObject bulletHolePrefab;
@@ -26,7 +28,12 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float shakeFrequency = 1f;
 
     private float cooldownTimer = -0.1f;
-    
+
+    private void Awake()
+    {
+        inaccuracy.inaccuracySources.Add(shootInaccuracy);
+    }
+
     private void OnEnable()
     {
         input.onShoot += Shoot;
@@ -45,7 +52,9 @@ public class PlayerShooter : MonoBehaviour
     private void Shoot()
     {
         if (cooldownTimer > 0f) return;
+        
         cooldownTimer = shootCooldown;
+        shootInaccuracy.SetMax();
         
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out var hit, 100f))
         {

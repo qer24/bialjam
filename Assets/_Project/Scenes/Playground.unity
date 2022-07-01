@@ -781,7 +781,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCam: {fileID: 1383000392}
   input: {fileID: 135756641613574975}
+  inaccuracy: {fileID: 914314434}
   shootCooldown: 0.5
+  shootInaccuracy:
+    max: 0.75
+    increaseSpeed: 0
+    decreaseSpeed: 5
   bulletHolePrefab: {fileID: 8032150598574252669, guid: cae8d2e1d632f7e4e8284ac5b32ec646,
     type: 3}
   bulletHoleDissapearTween:
@@ -817,6 +822,7 @@ MonoBehaviour:
     increaseSpeed: 3
     decreaseSpeed: 2
   inaccuracy: 0
+  inaccuracySources: []
 --- !u!1 &1028513131
 GameObject:
   m_ObjectHideFlags: 0
