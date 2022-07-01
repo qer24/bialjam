@@ -61,6 +61,11 @@ public class PlayerShooter : MonoBehaviour
             BulletHole(hit);
             Tracer(hit);
             CameraShake.instance.Shake(shakeDuration, shakeAmplitude, shakeFrequency);
+
+            if (hit.collider.transform.parent.TryGetComponent(out Health health))
+            {
+                health.RemoveHealth(1);
+            }
         }
     }
 
