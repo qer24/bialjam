@@ -2549,7 +2549,6 @@ GameObject:
   - component: {fileID: 1363135779928456668}
   - component: {fileID: 1846762173866633068}
   - component: {fileID: 1846762173866633057}
-  - component: {fileID: 8449152234495217046}
   - component: {fileID: 2670453457435245338}
   - component: {fileID: 1846762173866633066}
   m_Layer: 8
@@ -2624,23 +2623,6 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 6293533485592682045}
   TopClamp: 89
   BottomClamp: -89
---- !u!114 &8449152234495217046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846762173866633062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 909d917d73a63f940ac158d02e936645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  canPush: 0
-  strength: 1.1
 --- !u!114 &2670453457435245338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3984,7 +3966,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7786459, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
