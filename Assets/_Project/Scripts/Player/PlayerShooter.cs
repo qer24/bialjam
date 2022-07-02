@@ -68,7 +68,7 @@ public class PlayerShooter : MonoBehaviour
         CameraShake.instance.Shake(shakeDuration, shakeAmplitude, shakeFrequency);
         shootEvent.Play();
 
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out var hit, 100f))
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out var hit, 10f))
         {
             BulletHole(hit);
             Tracer(hit);

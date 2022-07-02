@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3806775480800367822}
   - component: {fileID: 3806775480800367823}
   - component: {fileID: 3806775480800367820}
+  - component: {fileID: 2066342401}
   m_Layer: 0
   m_Name: SizeDownEnemy
   m_TagString: Untagged
@@ -118,6 +119,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2066342401}
+        m_TargetAssemblyTypeName: ScoreOnDeath, Assembly-CSharp
+        m_MethodName: Score
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isDead: 0
 --- !u!114 &3806775480800367820
 MonoBehaviour:
@@ -132,6 +145,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeAward: -0.25
+--- !u!114 &2066342401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806775480800367809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0dfbcc8ea5f4334db5c272887b847cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 100
+  popupPrefab: {fileID: 7527895838817883213, guid: 30379009b563fb340ae01862e4521f2f,
+    type: 3}
 --- !u!1001 &3806775480713405146
 PrefabInstance:
   m_ObjectHideFlags: 0
