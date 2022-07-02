@@ -15,6 +15,7 @@ public class PlayerShooter : MonoBehaviour
 
     [Space] 
     [SerializeField] private float shootCooldown = 0.5f;
+    [SerializeField] private float shootRange = 40f;
     [SerializeField] private PlayerInnacuracy.InaccuracySource shootInaccuracy;
 
     [Space] 
@@ -68,7 +69,7 @@ public class PlayerShooter : MonoBehaviour
         CameraShake.instance.Shake(shakeDuration, shakeAmplitude, shakeFrequency);
         shootEvent.Play();
 
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out var hit, 100f))
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out var hit, shootRange))
         {
             BulletHole(hit);
             Tracer(hit);
