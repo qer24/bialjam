@@ -19,7 +19,7 @@ public class DeathPlane : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.rKey.wasPressedThisFrame)
+        if (!EnemyManager.instance.levelFinished && Keyboard.current.rKey.wasPressedThisFrame)
         {
             Reset();
         }
@@ -35,6 +35,8 @@ public class DeathPlane : MonoBehaviour
 
     private void Reset()
     {
+        player.gameObject.SetActive(true);
+        
         player.TeleportPlayer(startPos, Quaternion.identity);
         player.GetComponentInParent<PlayerSizeManager>().Reset();
         EnemyManager.instance.Reset();

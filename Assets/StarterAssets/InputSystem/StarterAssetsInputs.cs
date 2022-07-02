@@ -97,6 +97,16 @@ namespace StarterAssets
 			move = Vector2.zero;
 			look = Vector2.zero;
 		}
+
+		private void OnDisable()
+		{
+			SetCursorState(false);
+		}
+
+		private void OnEnable()
+		{
+			SetCursorState(cursorLocked);
+		}
 	}
 	
 }

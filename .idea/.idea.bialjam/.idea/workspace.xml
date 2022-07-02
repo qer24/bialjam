@@ -14,6 +14,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/DeathPlane.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/EnemyCountUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/EnemyManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/LevelEndPanel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/OnEndUnityEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/OnStartUnityEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PlayerHeightUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScoreManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScoreOnDeath.cs" root0="FORCE_HIGHLIGHTING" />
@@ -82,7 +85,7 @@
       <workItem from="1656678585491" duration="11816000" />
       <workItem from="1656707065439" duration="3271000" />
       <workItem from="1656715510689" duration="1615000" />
-      <workItem from="1656764625192" duration="9526000" />
+      <workItem from="1656764625192" duration="14770000" />
     </task>
     <servers />
   </component>

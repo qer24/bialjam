@@ -23,10 +23,12 @@ public class EnemyManager : Singleton<EnemyManager>
     private EnemyRef[] enemies;
     private EnemyRef[] enemyCopies;
 
-    private bool levelFinished = false;
+    public bool levelFinished = false;
 
     public int startEnemyCount;
     public int deadEnemyCount;
+
+    public event Action OnEnd;
     
     public override void Awake()
     {
@@ -54,6 +56,9 @@ public class EnemyManager : Singleton<EnemyManager>
         
         levelFinished = true;
         TimerManager.instance.Stop();
+        LevelEndPanel.instance.OpenEndPanel();
+        
+        OnEnd?.Invoke();
     }
 
     private void SpawnEnemyCopies()
