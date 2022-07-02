@@ -155,6 +155,25 @@ namespace StarterAssets
 			}
 		}
 
+		public void TeleportPlayer(Vector3 pos, Quaternion rot)
+		{
+			_controller.enabled = false;
+			
+			transform.position = pos;
+			transform.eulerAngles = rot.eulerAngles.WithX(0).WithZ(0);
+			CinemachineCameraTarget.transform.eulerAngles = rot.eulerAngles.WithY(0).WithZ(0);
+			_input.ResetInputs();
+			ResetCamera(rot.eulerAngles.x);
+
+			_controller.enabled = true;
+		}
+		
+		public void ResetCamera(float pitch = 0)
+		{
+			_cinemachineTargetPitch = pitch;
+			_rotationVelocity = 0;
+		}
+		
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed

@@ -39,4 +39,10 @@ public class PlayerSizeManager : MonoBehaviour
         currentSize = Mathf.Clamp(currentSize, minMaxSize.x, minMaxSize.y);
         OnSizeUpdated?.Invoke(currentSize);
     }
+
+    public void Reset()
+    {
+        currentSize = 1f;
+        OnSizeUpdated?.Invoke(currentSize);
+    }
 }

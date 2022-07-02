@@ -83,6 +83,12 @@ namespace StarterAssets
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
+		
+		public void ResetInputs()
+		{
+			move = Vector2.zero;
+			look = Vector2.zero;
+		}
 	}
 	
 }
