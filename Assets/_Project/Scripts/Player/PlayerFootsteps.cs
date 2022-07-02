@@ -28,6 +28,8 @@ public class PlayerFootsteps : MonoBehaviour
 
     private void Update()
     {
+        if (!fpsController.gameObject.activeSelf) return;
+        
         if (characterController.velocity.magnitude > 0.1f && characterController.isGrounded)
         {
             footstepTimer += Time.deltaTime;

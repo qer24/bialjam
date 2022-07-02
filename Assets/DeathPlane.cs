@@ -35,11 +35,6 @@ public class DeathPlane : MonoBehaviour
 
     private void Reset()
     {
-        player.gameObject.SetActive(true);
-        
-        player.TeleportPlayer(startPos, Quaternion.identity);
-        player.GetComponentInParent<PlayerSizeManager>().Reset();
-        EnemyManager.instance.Reset();
-        TimerManager.instance.Reset();
+        RestartManager.instance.Restart();
     }
 }

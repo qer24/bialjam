@@ -111,12 +111,7 @@ public class LevelEndPanel : Singleton<LevelEndPanel>
 
     public void Restart()
     {
-        player.gameObject.SetActive(true);
-        
-        player.TeleportPlayer(startPos, Quaternion.identity);
-        player.GetComponentInParent<PlayerSizeManager>().Reset();
-        EnemyManager.instance.Reset();
-        TimerManager.instance.Reset();
+        RestartManager.instance.Restart();
         
         gameObject.SetActive(false);
     }
