@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DeathPlane : MonoBehaviour
 {
@@ -16,12 +17,26 @@ public class DeathPlane : MonoBehaviour
         startPos = player.transform.position;
     }
 
+    private void Update()
+    {
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            Reset();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform == player.transform)
         {
-            player.TeleportPlayer(startPos, Quaternion.identity);
-            player.GetComponentInParent<PlayerSizeManager>().Reset();
+            Reset();
         }
+    }
+
+    private void Reset()
+    {
+        player.TeleportPlayer(startPos, Quaternion.identity);
+        player.GetComponentInParent<PlayerSizeManager>().Reset();
+        EnemyManager.instance.Reset();
     }
 }

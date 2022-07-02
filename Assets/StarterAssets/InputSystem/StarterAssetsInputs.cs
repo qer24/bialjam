@@ -11,17 +11,20 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
-		public bool jump;
+		public bool jump => Time.time - lastJumpTime <= jumpImputBufferTime;
 		public bool sprint;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
+		[SerializeField] private float jumpImputBufferTime = 0.3f;
 
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
 		public event Action onShoot;
+
+		private float lastJumpTime;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
@@ -64,9 +67,14 @@ namespace StarterAssets
 			look = newLookDirection;
 		}
 
+		public void ResetJump() => lastJumpTime = Time.time - 99f;
+		
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+			if (newJumpState)
+			{
+				lastJumpTime = Time.time;
+			}
 		}
 
 		public void SprintInput(bool newSprintState)

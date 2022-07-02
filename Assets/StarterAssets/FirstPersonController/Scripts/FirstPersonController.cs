@@ -43,6 +43,7 @@ namespace StarterAssets
 		public float GroundedRadius = 0.5f;
 		[Tooltip("What layers the character uses as ground")]
 		public LayerMask GroundLayers;
+		[SerializeField] private float coyoteTime = 0.25f;
 
 		[Header("Cinemachine")]
 		[Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
@@ -76,7 +77,10 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 		
-		public event Action OnJump, OnLand; 
+		public event Action OnJump, OnLand;
+
+		private float lastGroundedTime = 0f;
+		private bool inCoyote;
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -131,6 +135,16 @@ namespace StarterAssets
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius * transform.lossyScale.x, GroundLayers, QueryTriggerInteraction.Ignore);
+
+			if (Grounded)
+			{
+				lastGroundedTime = Time.time;
+				inCoyote = false;
+			}
+			else
+			{
+				inCoyote = Time.time - lastGroundedTime <= coyoteTime;
+			}
 		}
 
 		private void CameraRotation()
@@ -223,13 +237,21 @@ namespace StarterAssets
 
 		private void JumpAndGravity()
 		{
-			if (Grounded)
+			void Jump()
+			{
+				// the square root of H * -2 * G = how much velocity needed to reach desired height
+				_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+				lastGroundedTime = 0f;
+				OnJump?.Invoke();
+			}
+			
+			if (Grounded || inCoyote)
 			{
 				// reset the fall timeout timer
 				_fallTimeoutDelta = FallTimeout;
 
 				// stop our velocity dropping infinitely when grounded
-				if (_verticalVelocity < 0.0f)
+				if (!inCoyote && _verticalVelocity < 0.0f)
 				{
 					_verticalVelocity = -2f;
 				}
@@ -237,9 +259,7 @@ namespace StarterAssets
 				// Jump
 				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
 				{
-					// the square root of H * -2 * G = how much velocity needed to reach desired height
-					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-					OnJump?.Invoke();
+					Jump();
 				}
 
 				// jump timeout
@@ -265,7 +285,7 @@ namespace StarterAssets
 				}
 
 				// if we are not grounded, do not jump
-				_input.jump = false;
+				//_input.ResetJump();
 			}
 
 			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
