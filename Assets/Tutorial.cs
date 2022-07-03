@@ -17,6 +17,8 @@ public class Tutorial : MonoBehaviour
     
     private IEnumerator Start()
     {
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("LowPass", 1f);
+
         yield return new WaitForSeconds(0.1f);
         
         Time.timeScale = startTimeScale;
@@ -40,6 +42,7 @@ public class Tutorial : MonoBehaviour
             Time.timeScale = Mathf.Lerp(startTimeScale, 1f, val);
             postProcessing.weight = 1 - val;
             tutorialText.alpha = 1 - val;
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("LowPass", 1 - val);
         }, 0f, 1f, endTutorialTween.time)).setIgnoreTimeScale(true);
     }
 }

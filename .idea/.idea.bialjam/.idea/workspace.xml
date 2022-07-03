@@ -3,7 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="942aa9a6-0dfc-4f0c-b108-d78837fe4653" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bialjam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bialjam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DeathPlane.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DeathPlane.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RestartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RestartManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Tutorial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tutorial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Fonts/Finlandica/Finlandica-VariableFont_wght SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Fonts/Finlandica/Finlandica-VariableFont_wght SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/SceneSetup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/SceneSetup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.strings.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.strings.bank" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,14 +21,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/RestartManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Bullet.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ReversePlayerOnDeath.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/SineFloat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../backup/Bullet Hell Jam 3 second try/Assets/Scripts/MusicManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../iyg2022/Assets/StarterAssets/FirstPersonController/Scripts/FirstPersonController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/SineFloat.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Health.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Tutorial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ReversePlayerOnDeath.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/RestartManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -79,7 +87,8 @@
       <workItem from="1656715510689" duration="1615000" />
       <workItem from="1656764625192" duration="14770000" />
       <workItem from="1656795915051" duration="7864000" />
-      <workItem from="1656806022448" duration="2257000" />
+      <workItem from="1656806022448" duration="3184000" />
+      <workItem from="1656811254180" duration="614000" />
     </task>
     <servers />
   </component>

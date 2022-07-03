@@ -17,14 +17,6 @@ public class DeathPlane : MonoBehaviour
         startPos = player.transform.position;
     }
 
-    private void Update()
-    {
-        if (!EnemyManager.instance.levelFinished && Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            Reset();
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform == player.transform)

@@ -10,9 +10,12 @@ using UnityEngine.SceneManagement;
 public class RestartManager : Singleton<RestartManager>
 {
     [SerializeField] private EventReference restartSfx;
+    [SerializeField] private float restartCooldown = 0.5f;
     
     private FirstPersonController player;
     private Vector3 startPos;
+
+    private float lastRestartTime;
 
     public override void Awake()
     {
@@ -25,7 +28,13 @@ public class RestartManager : Singleton<RestartManager>
 
     private void Update()
     {
-        switch (Keyboard.current.leftCtrlKey.isPressed)
+        if (!EnemyManager.instance.levelFinished && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            if (Time.time - lastRestartTime > restartCooldown)
+                Restart();
+        }
+        
+        switch (Keyboard.current.leftAltKey.isPressed)
         {
             case true when Keyboard.current.digit1Key.wasPressedThisFrame:
                 SceneManager.LoadScene(0);
@@ -50,6 +59,8 @@ public class RestartManager : Singleton<RestartManager>
 
     public void Restart()
     {
+        lastRestartTime = Time.time;
+        
         restartSfx.Play();
         
         player.gameObject.SetActive(true);
@@ -59,6 +70,6 @@ public class RestartManager : Singleton<RestartManager>
         EnemyManager.instance.Reset();
         TimerManager.instance.Reset();
         
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{fd0c58f2-3775-496a-8464-91dd2b17a6f5}">
+		<property name="assetPath">
+			<value>arcy_game_wip_maybe_maybe_not_idk.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>51.375</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2486b5b7-64ca-4c7d-b8a5-8ef3437ba24a}</destination>
+		</relationship>
+	</object>
+</objects>
