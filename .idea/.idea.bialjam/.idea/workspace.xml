@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="942aa9a6-0dfc-4f0c-b108-d78837fe4653" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bialjam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bialjam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Enemies/ShootingEnemy/ShootingEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Enemies/ShootingEnemy/ShootingEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level3.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level5.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Health.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level1.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +21,7 @@
     <setting file="file://$PROJECT_DIR$/../iyg2022/Assets/StarterAssets/FirstPersonController/Scripts/FirstPersonController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Enemies/Enemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Health.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Tutorial.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -82,7 +79,7 @@
       <workItem from="1656715510689" duration="1615000" />
       <workItem from="1656764625192" duration="14770000" />
       <workItem from="1656795915051" duration="7864000" />
-      <workItem from="1656806022448" duration="1008000" />
+      <workItem from="1656806022448" duration="2257000" />
     </task>
     <servers />
   </component>
