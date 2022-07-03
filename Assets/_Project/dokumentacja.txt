@@ -1,6 +1,7 @@
 LeanTween - The MIT License (MIT)
-FMOD - FMOD EULA pozwalaj¹cy na wykorzystanie niekomercyjne
+FMOD - FMOD EULA pozwalajï¿½cy na wykorzystanie niekomercyjne
 StarterAssets - Unity Companion License
 FlatKit - licencja Unity Asset Store
 Odin - licencja Unity Asset Store
 Exploit Avoid Leaderboards, Dino0040 - The MIT License (MIT)
+Muzyka stworzona przez Prox276 na potrzeby gry, Creative Commons Attribution 4.0
