@@ -12,16 +12,19 @@ public class Health : MonoBehaviour
     [SerializeField] private EventReference deathSfx;
 
     public event Action<int> OnHealthChanged;
+    public UnityEvent OnSpawn;
     public UnityEvent OnDeath;
-    
+
     public bool isDead;
 
-    public virtual void Start()
+    private void OnEnable()
     {
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(currentHealth);
 
         isDead = false;
+        
+        OnSpawn?.Invoke();
     }
 
     public virtual void RemoveHealth(int amount)

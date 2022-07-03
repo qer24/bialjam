@@ -86,7 +86,11 @@ public class Enemy : MonoBehaviour
                 anim.enabled = true;
                 
                 exclamation.SetActive(true);
-                WaitUtils.Wait(exclamationTime, true, () => exclamation.SetActive(false));
+                WaitUtils.Wait(exclamationTime, true, () => {
+                        if (exclamation != null)
+                            exclamation.SetActive(false);
+                    }
+                );
 
                 shootTimer = shootCoolddown * 0.5f;
 

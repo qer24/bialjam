@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2365853643157259626}
-  detectionTime: 0.5
+  detectionTime: 0.25
   detectionRange: 12
   detectionSfx:
     Guid:
