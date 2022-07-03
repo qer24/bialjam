@@ -17,10 +17,9 @@ public class Tutorial : MonoBehaviour
     
     private IEnumerator Start()
     {
-        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("LowPass", 1f);
+        yield return new WaitForSeconds(0.05f);
 
-        yield return new WaitForSeconds(0.1f);
-        
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("LowPass", 1f);
         Time.timeScale = startTimeScale;
         postProcessing.weight = 1f;
     }

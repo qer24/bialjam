@@ -3,14 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="942aa9a6-0dfc-4f0c-b108-d78837fe4653" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bialjam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bialjam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DeathPlane.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DeathPlane.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/RestartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RestartManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LevelEndPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LevelEndPanel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Tutorial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tutorial.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Fonts/Finlandica/Finlandica-VariableFont_wght SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Fonts/Finlandica/Finlandica-VariableFont_wght SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/SceneSetup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/SceneSetup.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.bank" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.strings.bank" beforeDir="false" afterPath="$PROJECT_DIR$/FMOD/project/Build/Desktop/Master.strings.bank" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/bench.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/bench.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/cup.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/cup.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/lamp.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/lamp.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/paper.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/paper.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/trashcan.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/trashcan.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level4.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Level6.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Level6.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/BurstAotSettings_StandaloneWindows.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/CommonBurstAotSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/CommonBurstAotSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +54,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build\bialjam.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="H:\Github\bialjam\Build" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Filip stuff\unity\2021.3\2021.3.5f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Filip stuff\github\bialjam\bialjam&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
@@ -88,7 +105,9 @@
       <workItem from="1656764625192" duration="14770000" />
       <workItem from="1656795915051" duration="7864000" />
       <workItem from="1656806022448" duration="3184000" />
-      <workItem from="1656811254180" duration="614000" />
+      <workItem from="1656811254180" duration="1028000" />
+      <workItem from="1656840509578" duration="55000" />
+      <workItem from="1656841144417" duration="100000" />
     </task>
     <servers />
   </component>

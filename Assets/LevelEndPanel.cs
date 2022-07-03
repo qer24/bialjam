@@ -37,6 +37,8 @@ public class LevelEndPanel : Singleton<LevelEndPanel>
 
     public void OpenEndPanel()
     {
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("LowPass", 1f);
+    
         gameObject.SetActive(true);
         
         nicknameInput.text = PlayerPrefs.GetString(NicknameString);
@@ -124,5 +126,10 @@ public class LevelEndPanel : Singleton<LevelEndPanel>
     public void Reset()
     {
         SceneManager.LoadScene(0);
+    }
+
+    private void OnDisable()
+    {
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("LowPass", 0f);
     }
 }
