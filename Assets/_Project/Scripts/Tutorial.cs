@@ -28,7 +28,7 @@ public class Tutorial : MonoBehaviour
     {
         if (endedTutorial) return;
         
-        if (tutorialEnemies.Any(hp => hp.isDead))
+        if (tutorialEnemies.Any(hp => hp == null || hp.isDead))
         {
             endedTutorial = true;
             EndTutorial();
