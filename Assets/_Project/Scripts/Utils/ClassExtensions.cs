@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using TMPro;
@@ -259,5 +260,14 @@ public static class ClassExtensions
     {
         var start = text.color;
         return LeanTween.value(text.gameObject, val => text.color = Color.Lerp(start, to, val), 0, 1f, time);
+    }
+    
+    public static float ParseAsFloat(this string input)
+    {
+        input = input.Replace(',', '.');
+        var parsed = float.TryParse(input, NumberStyles.Any, CultureInfo.InvariantCulture, out float value);
+
+        if (!parsed) return 0;
+        return value;
     }
 }

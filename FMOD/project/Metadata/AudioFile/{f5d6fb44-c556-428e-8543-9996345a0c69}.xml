@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f5d6fb44-c556-428e-8543-9996345a0c69}">
+		<property name="assetPath">
+			<value>exclamation.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.4628571428571429</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2486b5b7-64ca-4c7d-b8a5-8ef3437ba24a}</destination>
+		</relationship>
+	</object>
+</objects>

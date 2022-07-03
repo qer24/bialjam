@@ -75,12 +75,14 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
-		private const float _threshold = 0.01f;
+		//private const float _threshold = 0.01f;
 		
 		public event Action OnJump, OnLand;
 
 		private float lastGroundedTime = 0f;
 		private bool inCoyote;
+
+		public float reverseMovement = 1f;
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -149,24 +151,20 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
-			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
-			{
-				//Don't multiply mouse input by Time.deltaTime
-				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+			//Don't multiply mouse input by Time.deltaTime
+			float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 				
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
+			_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
+			_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
 
-				// clamp our pitch rotation
-				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+			// clamp our pitch rotation
+			_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+			// Update Cinemachine camera target pitch
+			CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
-				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
-			}
+			// rotate the player left and right
+			transform.Rotate(Vector3.up * _rotationVelocity);
 		}
 
 		public void TeleportPlayer(Vector3 pos, Quaternion rot)
@@ -180,6 +178,8 @@ namespace StarterAssets
 			ResetCamera(rot.eulerAngles.x);
 
 			_controller.enabled = true;
+
+			reverseMovement = 1f;
 		}
 		
 		public void ResetCamera(float pitch = 0)
@@ -229,6 +229,7 @@ namespace StarterAssets
 			{
 				// move
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+				inputDirection *= reverseMovement;
 			}
 
 			// move the player
@@ -268,7 +269,7 @@ namespace StarterAssets
 					_jumpTimeoutDelta -= Time.deltaTime;
 				}
 				
-				if (!_wasGrounded)
+				if (!_wasGrounded && !inCoyote)
 				{
 					OnLand?.Invoke();
 				}
