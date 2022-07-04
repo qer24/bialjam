@@ -104,11 +104,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1. gracz1
+  m_text: '1. player1
 
-    <b>2. gracz2</b>
+    <b>2. player2</b>
 
-    3. gracz3'
+    3. player3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1174a6f01aa980d4187614fc1f6473ea, type: 2}
   m_sharedMaterial: {fileID: -6815138795701552438, guid: 1174a6f01aa980d4187614fc1f6473ea,
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Od pocz\u0105tku"
+  m_text: Start over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1174a6f01aa980d4187614fc1f6473ea, type: 2}
   m_sharedMaterial: {fileID: -6815138795701552438, guid: 1174a6f01aa980d4187614fc1f6473ea,
@@ -660,7 +660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Wy\u015Blij"
+  m_text: Send
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1174a6f01aa980d4187614fc1f6473ea, type: 2}
   m_sharedMaterial: {fileID: -6815138795701552438, guid: 1174a6f01aa980d4187614fc1f6473ea,
@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Level X Uko\u0144czony"
+  m_text: Level X Completed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1174a6f01aa980d4187614fc1f6473ea, type: 2}
   m_sharedMaterial: {fileID: -6815138795701552438, guid: 1174a6f01aa980d4187614fc1f6473ea,
@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Kontynuuj
+  m_text: Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1174a6f01aa980d4187614fc1f6473ea, type: 2}
   m_sharedMaterial: {fileID: -6815138795701552438, guid: 1174a6f01aa980d4187614fc1f6473ea,
@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Wpisz nick...
+  m_text: Enter nickname...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1174a6f01aa980d4187614fc1f6473ea, type: 2}
   m_sharedMaterial: {fileID: -6815138795701552438, guid: 1174a6f01aa980d4187614fc1f6473ea,

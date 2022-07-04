@@ -44,7 +44,7 @@ public class LevelEndPanel : Singleton<LevelEndPanel>
         nicknameInput.text = PlayerPrefs.GetString(NicknameString);
 
         var currentLevel = SceneManager.GetActiveScene().buildIndex;
-        levelNameText.text = $"Level {currentLevel + 1} Ukończony";
+        levelNameText.text = $"Level {currentLevel + 1} Completed";
 
         var isLastLevel = currentLevel + 1 >= SceneManager.sceneCountInBuildSettings;
         continueButton.SetActive(!isLastLevel);
